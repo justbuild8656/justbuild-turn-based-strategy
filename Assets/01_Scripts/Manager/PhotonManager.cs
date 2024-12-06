@@ -9,6 +9,7 @@ using Random = UnityEngine.Random;
 
 public class PhotonManager : MonoBehaviourPunCallbacks
 {
+
     public static PhotonManager Instance { get; private set; }
 
     public List<RoomInfo> CurRoomInfos;
@@ -16,18 +17,13 @@ public class PhotonManager : MonoBehaviourPunCallbacks
     
     private Action _failCallBack;
 
+    int currentSpawnIndex;
+
     private void Awake()
     {
-        if (Instance == null)
-        {
-            Instance = this;
-            DontDestroyOnLoad(gameObject);
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
-        
+        Instance = this;
+        DontDestroyOnLoad(gameObject);
+
         PhotonNetwork.SendRate = 30;
         PhotonNetwork.SerializationRate = 15;
     }
@@ -64,7 +60,6 @@ public class PhotonManager : MonoBehaviourPunCallbacks
     {
         base.OnCreateRoomFailed(returnCode, message);
     }
-
     public override void OnConnectedToMaster()
     {
         base.OnConnectedToMaster();
@@ -113,11 +108,6 @@ public class PhotonManager : MonoBehaviourPunCallbacks
     {
         base.OnJoinedRoom();
         SceneManager.LoadScene("InGame");
-    }
-
-    public override void OnPlayerEnteredRoom(Photon.Realtime.Player newPlayer)
-    {
-
     }
 
     
