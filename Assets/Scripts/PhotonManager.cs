@@ -5,6 +5,7 @@ using Photon.Pun;
 using Photon.Realtime;
 using System;
 using UnityEngine.SceneManagement;
+using Random = UnityEngine.Random;
 
 public class PhotonManager : MonoBehaviourPunCallbacks
 {
@@ -36,9 +37,9 @@ public class PhotonManager : MonoBehaviourPunCallbacks
         TryToJoinServer();
     }
     
-    public void TryToJoinServer()
+    public void TryToJoinServer() //서버 접속
     {
-        if (!PhotonNetwork.IsConnected)
+        if (!PhotonNetwork.IsConnected) 
         {
             PhotonNetwork.ConnectUsingSettings();
         }
@@ -48,16 +49,22 @@ public class PhotonManager : MonoBehaviourPunCallbacks
         }
     }
     
-    public void CreateRoom(string roomTitle, int maxPlayer)
+    public void CreateRoom(string roomCode, int maxPlayer)
     {
+
         RoomOptions roomOptions = new()
         {
             MaxPlayers = maxPlayer
         };
         
-        PhotonNetwork.CreateRoom(roomTitle, roomOptions);
+        PhotonNetwork.CreateRoom(roomCode, roomOptions);
     }
-    
+
+    public override void OnCreateRoomFailed(short returnCode, string message)
+    {
+        base.OnCreateRoomFailed(returnCode, message);
+    }
+
     public override void OnConnectedToMaster()
     {
         base.OnConnectedToMaster();
@@ -112,4 +119,6 @@ public class PhotonManager : MonoBehaviourPunCallbacks
     {
 
     }
+
+    
 }

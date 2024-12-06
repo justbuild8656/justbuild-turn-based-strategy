@@ -5,18 +5,28 @@ using WebSocketSharp;
 
 public class MakeRoomButton : MonoBehaviour
 {
-    public TMP_InputField roomNameInputField;
-    public int maxPlayers;
     public GameObject loadingPanel;
+
+    public int maxPlayers;
+    private void Start()
+    {
+        
+    }
 
     public void OnClickedCreateRoom()
     {
-        if (string.IsNullOrEmpty(roomNameInputField.text))
-        {
-            return;
-        }
-
         loadingPanel.SetActive(true);
-        PhotonManager.Instance.CreateRoom(roomNameInputField.text, maxPlayers);
+        PhotonManager.Instance.CreateRoom(CreateCode(), maxPlayers);
+    }
+
+    string CreateCode()
+    {
+        int[] numbers = new int[5];
+        string code = "";
+        for (int i = 0; i < numbers.Length; i++)
+        {
+            code += Random.Range(0, 9).ToString();
+        }
+        return code;
     }
 }
