@@ -16,6 +16,8 @@ public class GameManager : MonoBehaviourPunCallbacks
         DontDestroyOnLoad(gameObject); // 게임 씬이 변경되어도 이 객체를 파괴하지 않음
     }
 
+    public Player playerMine;
+
     // 게임의 플레이어 리스트
     public List<Player> players = new List<Player>();
 
@@ -35,11 +37,7 @@ public class GameManager : MonoBehaviourPunCallbacks
         GameObject player = PhotonNetwork.Instantiate("Player", spawnPoint.transform.position, Quaternion.identity);
         Debug.Log("Instantiated Player");
 
-        if (PhotonNetwork.IsMasterClient)
-        {
-            Debug.Log("Master client calling RPC...");
-            photonView.RPC("RPCSetPlayer", RpcTarget.All, player.GetComponent<PhotonView>().ViewID);
-        }
+        photonView.RPC("RPCSetPlayer", RpcTarget.All, player.GetComponent<PhotonView>().ViewID);
 
     }
 
@@ -52,7 +50,8 @@ public class GameManager : MonoBehaviourPunCallbacks
 
         // 가져온 객체에서 Player 컴포넌트를 추출
         Player player = photonView.GetComponent<Player>();
-
+        if (photonView.IsMine)
+            playerMine = player;
         // 플레이어를 리스트에 추가
         players.Add(player);
     }
