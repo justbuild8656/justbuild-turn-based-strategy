@@ -28,7 +28,7 @@ public class QTEManager : MonoBehaviour
         for (var index = 0; index < _quickTimeEvents.Count; index++)
         {
             var qte = _quickTimeEvents[index];
-            if (qte.IsEnded)
+            if (qte.IsCompleted)
             {
                 _quickTimeEvents.RemoveAt(index);
             }
