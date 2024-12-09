@@ -9,7 +9,6 @@ using Random = UnityEngine.Random;
 
 public class PhotonManager : MonoBehaviourPunCallbacks
 {
-
     public static PhotonManager Instance { get; private set; }
 
     public List<RoomInfo> CurRoomInfos;

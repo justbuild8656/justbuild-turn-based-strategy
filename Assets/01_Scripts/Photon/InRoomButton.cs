@@ -1,4 +1,4 @@
-using System;
+ï»¿using System;
 using TMPro;
 using UnityEngine;
 using System.Collections.Generic;
@@ -14,7 +14,7 @@ public class InRoomButton : MonoBehaviourPunCallbacks
         string roomName = inputField.text;
         if (string.IsNullOrEmpty(roomName))
         {
-            Debug.Log("¹æ ÀÌ¸§À» ÀÔ·ÂÇÏ¼¼¿ä.");
+            Debug.Log("ë°© ì´ë¦„ì„ ì…ë ¥í•˜ì„¸ìš”.");
             return;
         }
         PhotonManager.Instance.TryToJoinRoom(roomName, OnJoinRoomFailed);
@@ -22,10 +22,10 @@ public class InRoomButton : MonoBehaviourPunCallbacks
 
     private void OnJoinRoomFailed()
     {
-        Debug.Log($"'{inputField.text}' ¹æ¿¡ Á¢¼ÓÇÒ ¼ö ¾ø½À´Ï´Ù. ¹æÀÌ Á¸ÀçÇÏÁö ¾Ê½À´Ï´Ù.");
+        Debug.Log($"'{inputField.text}' ë°©ì— ì ‘ì†í•  ìˆ˜ ì—†ìŠµë‹ˆë‹¤. ë°©ì´ ì¡´ì¬í•˜ì§€ ì•ŠìŠµë‹ˆë‹¤.");
         for(int i = 0; i < PhotonManager.Instance.CurRoomInfos.Count; i++)
         {
-            Debug.Log($"¹æ ÀÌ¸§: {PhotonManager.Instance.CurRoomInfos[i].Name}");
+            Debug.Log($"ë°© ì´ë¦„: {PhotonManager.Instance.CurRoomInfos[i].Name}");
         }
     }
 }
