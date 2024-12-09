@@ -18,12 +18,7 @@ public class MakeRoomButton : MonoBehaviourPunCallbacks
         string roomCode = CreateCode();
         Debug.Log("¹æ ÄÚµå :" + roomCode);
 
-        RoomOptions roomOptions = new RoomOptions();
-        roomOptions.MaxPlayers = (byte)maxPlayers;
-        roomOptions.CustomRoomProperties = new ExitGames.Client.Photon.Hashtable { { "roomCode", roomCode } };
-        roomOptions.CustomRoomPropertiesForLobby = new string[] { "roomCode" };
-
-        PhotonNetwork.CreateRoom(roomCode, roomOptions);
+        PhotonManager.Instance.CreateRoom(roomCode, 3);
     }
 
     string CreateCode()
