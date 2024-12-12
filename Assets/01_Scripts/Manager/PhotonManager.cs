@@ -1,11 +1,8 @@
-using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 using Photon.Pun;
 using Photon.Realtime;
 using System;
 using UnityEngine.SceneManagement;
-using Random = UnityEngine.Random;
 
 public class PhotonManager : MonoBehaviourPunCallbacks
 {
@@ -15,7 +12,7 @@ public class PhotonManager : MonoBehaviourPunCallbacks
     public bool IsReadyToJoinRoom => PhotonNetwork.IsConnectedAndReady && PhotonNetwork.InLobby;
     
     private Action _failCallBack;
-
+    
     int currentSpawnIndex;
 
     private void Awake()
@@ -32,7 +29,7 @@ public class PhotonManager : MonoBehaviourPunCallbacks
         TryToJoinServer();
     }
     
-    public void TryToJoinServer() //서버 접속
+    public void TryToJoinServer()
     {
         if (!PhotonNetwork.IsConnected) 
         {
@@ -54,11 +51,7 @@ public class PhotonManager : MonoBehaviourPunCallbacks
         
         PhotonNetwork.CreateRoom(roomCode, roomOptions);
     }
-
-    public override void OnCreateRoomFailed(short returnCode, string message)
-    {
-        base.OnCreateRoomFailed(returnCode, message);
-    }
+    
     public override void OnConnectedToMaster()
     {
         base.OnConnectedToMaster();
@@ -108,6 +101,4 @@ public class PhotonManager : MonoBehaviourPunCallbacks
         base.OnJoinedRoom();
         SceneManager.LoadScene("InGame");
     }
-
-    
 }
