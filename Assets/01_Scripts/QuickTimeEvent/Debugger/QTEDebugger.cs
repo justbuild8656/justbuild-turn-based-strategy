@@ -17,13 +17,13 @@ public class QTEDebugger : MonoBehaviour
     {
         _qte = new QuickTimeEvent(reactionKey, qteDuration);
         _qte.AddListener(EndEvent);
-        _qte.Start();
+        _qte.Start(this);
     }
 
     private void Update()
     {
         if (_qte == null) return;
-        reactionTimeText.text = $"Reaction Time: {(_qte.QTEDuration / 2 - _qte.CurrentTime) * 1000} (ms)";
+        reactionTimeText.text = $"Reaction Time: {(_qte.JudgeTime - _qte.QTETimer) * 1000} (ms)";
     }
 
     private void EndEvent(QTEResult result)

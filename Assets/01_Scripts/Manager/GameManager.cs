@@ -38,15 +38,14 @@ public class GameManager : MonoBehaviourPunCallbacks
         Debug.Log("Instantiated Player");
 
         photonView.RPC("RPCSetPlayer", RpcTarget.All, player.GetComponent<PhotonView>().ViewID);
-
     }
 
     // RPC 메서드: 네트워크를 통해 ViewID를 받아 플레이어를 리스트에 추가
     [PunRPC]
-    void RPCSetPlayer(int ViewID)
+    void RPCSetPlayer(int viewID)
     {
         // PhotonView를 통해 ViewID에 해당하는 객체를 가져옴
-        PhotonView photonView = PhotonNetwork.GetPhotonView(ViewID);
+        PhotonView photonView = PhotonNetwork.GetPhotonView(viewID);
 
         // 가져온 객체에서 Player 컴포넌트를 추출
         Player player = photonView.GetComponent<Player>();
