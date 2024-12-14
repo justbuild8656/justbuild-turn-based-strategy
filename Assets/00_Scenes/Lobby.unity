@@ -1127,7 +1127,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   loadingPanel: {fileID: 14584307}
-  maxPlayers: 4
+  maxPlayers: 3
 --- !u!1 &1147312862
 GameObject:
   m_ObjectHideFlags: 0
