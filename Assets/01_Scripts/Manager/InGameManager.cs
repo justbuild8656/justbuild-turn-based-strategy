@@ -47,7 +47,8 @@ public class InGameManager : MonoBehaviourPunCallbacks
     [PunRPC]
     public void RPCStartGame()
     {
-        GameObject player = PhotonNetwork.Instantiate("Player", Vector3.zero, Quaternion.identity);
+        var playerCount = PhotonNetwork.CurrentRoom.PlayerCount;
+        GameObject player = PhotonNetwork.Instantiate("Player"+ playerCount, Vector3.zero, Quaternion.identity);
         photonView.RPC("RPCSetPlayer", RpcTarget.All, player.GetComponent<PhotonView>().ViewID);
         photonView.RPC("RPCActivatePlayerPane", RpcTarget.All);
     }
